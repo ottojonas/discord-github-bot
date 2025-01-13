@@ -1,11 +1,11 @@
 const express = require("express");
-const { Client, Intents } = require("discord.js");
+const { Client, Intents, GatewayIntentBits } = require("discord.js");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
-const discordClient = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 const GITHUB_WEBHOOK_SECRET = process.env.GITHUB_WEBHOOK_SECRET;
 const DISCORD_CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
@@ -13,7 +13,7 @@ const DISCORD_CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
 discordClient.login(DISCORD_TOKEN);
 
 discordClient.once("ready", () => {
-  console.log("Online");
+	console.log("Online");
 });
 
 app.use(bodyParser.json());
