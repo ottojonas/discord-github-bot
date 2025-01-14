@@ -1,6 +1,5 @@
 require("dotenv").config();
-const { Client, Intents } = require("discord.js");
-const fetch = require("node-fetch");
+const { Client, GatewayIntentBits } = require("discord.js");
 const cron = require("node-cron");
 
 const discordToken = process.env.DISCORD_TOKEN;
@@ -8,17 +7,25 @@ const channelId = process.env.CHANNEL_ID;
 const repoOwner = "ottojonas";
 const repoName = "ottos-bible";
 const githubToken = process.env.GITHUB_TOKEN;
-const client = new Clinet({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
 client.once("ready", () => {
   console.log("Discord bot ready");
 });
 
-client.login(discordToken);
+client.on("error", (error) => {
+  console.error("Discord client error:", error);
+});
+
+client.login(discordToken).catch((error) => {
+  console.error("Failed to login:", error);
+});
 
 async function checkForUpdates() {
+  const fetch = (await import("node-fetch")).default;
   const response = await fetch(
     `https://api.github.com/repos/${repoOwner}/${repoName}/events`,
     {
