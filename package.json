@@ -1,28 +1,9 @@
 {
-  "name": "discord-github-bot",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ottojonas/discord-github-bot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/ottojonas/discord-github-bot/issues"
-  },
-  "homepage": "https://github.com/ottojonas/discord-github-bot#readme",
-  "description": "",
+  "type": "module", 
   "dependencies": {
+    "body-parser": "^1.20.3",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
-    "node-cron": "^3.0.3",
-    "node-fetch": "^3.3.2"
+    "express": "^4.21.2"
   }
 }
